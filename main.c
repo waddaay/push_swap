@@ -6,7 +6,7 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 01:51:45 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/05 05:05:28 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/05 05:33:19 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ void    rrotate(int *stack, int size)
 
 void    push(int *stack_x, int *stack_y, int size_x, int size_y)
 {
-    int tmp1, tmp2;
+    int tmp1;
+    int tmp2;
     int i;
 
     if (size_y == 0) return ;
@@ -131,26 +132,3 @@ void    push(int *stack_x, int *stack_y, int size_x, int size_y)
     rotate(stack_y, size_y);
     stack_y[--size_y] = 0;
 }
-
-
-int main(int argc, char **argv)
-{
-    int size = stack_size(argc, argv);
-    int *stack_a, *stack_b;
-    int i = 0;
-
-    stack_a = create_stack(size);
-    stack_b = create_stack(size);
-
-    stack_b[0] = -9;
-    stack_b[1] = 1;
-    stack_b[2] = 2;
-    stack_b[3] = 7;
-    
-    fill_stack(argc, argv, stack_a, size);
-    push(stack_a,stack_b, size, size);
-    while (i < size)
-        printf("%d\n", stack_b[i++]);
-    
-}
-
