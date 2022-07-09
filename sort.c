@@ -6,7 +6,7 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 22:54:17 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/09 02:10:37 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/09 03:04:03 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,23 @@ void push_all_to_b(t_stack *stack_a, t_stack *stack_b, t_stack *stack_s, int div
                 rotate(stack_a, "ra\n");
         }
     }
-   
+    free(stack_s->body);
+    free(stack_b);
+}
+
+int max(t_stack *stack)
+{
+    int max;
+    int i;
+
+    i = stack->top;
+    // printf("top : %d, size : %d", stack->top, stack->size);
+    max = stack->body[stack->top];
+    while (i < stack->size)
+    {
+        if (stack->body[i] > max)
+            max = stack->body[i];
+        i++;
+    }
+    return (max);
 }
