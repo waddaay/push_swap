@@ -6,7 +6,7 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 22:54:17 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/06 19:22:20 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/09 02:10:37 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,19 @@ t_stack    *sorted_stack(t_stack *stack_a)
     int     i;
     int     j;
     
-    stack_s = create_stack(stack_a->size);
-    ft_memmove(stack_s, stack_a, stack_a->size*4);
+    stack_s = create_stack(stack_a->size, 0);
+    i = -1;
+    while (i++ < stack_a->size)
+    {
+        stack_s->body[i] = stack_a->body[i];
+    }
     i = 0;
     while (i < stack_s->size)
     {
         j = i + 1;
         while (j < stack_s->size)
         {
-            if (stack_s->body[i] < stack_s->body[j])
+            if (stack_s->body[i] > stack_s->body[j])
             {
                 tmp = stack_s->body[i];
                 stack_s->body[i] = stack_s->body[j];
@@ -38,4 +42,38 @@ t_stack    *sorted_stack(t_stack *stack_a)
         i++;
     }
     return stack_s;
+}
+
+void push_all_to_b(t_stack *stack_a, t_stack *stack_b, t_stack *stack_s, int div)
+{
+    int pv1;
+    int pv2;
+    int i;
+    
+    pv1 = stack_s->size / div;
+    while (pv1 < stack_a->size - 1)
+    {
+        pv1 = (stack_s->size + stack_s->top) / div;
+        if (pv1 >= stack_a->size)
+            pv1 = stack_a->size - 1;
+        stack_s->top = stack_s->top + pv1;
+        pv2 = pv1 / 2;
+        i = 0;
+        while (i++ < stack_s->size)
+        {
+            
+            if (stack_a->body[stack_a->top] < stack_s->body[pv1])
+            {
+                pb(stack_a, stack_b);
+                if (stack_b->top + 2 < stack_b->size)
+                {
+                    if (stack_b->body[stack_b->top] > stack_s->body[pv2])
+                        rotate(stack_b, "rb\n");
+                }
+            }        
+            else
+                rotate(stack_a, "ra\n");
+        }
+    }
+   
 }
