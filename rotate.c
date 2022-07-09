@@ -6,7 +6,7 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:57:36 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/08 00:05:43 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/09 00:27:18 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void rotate(t_stack *stack, char *str)
     int tmp2;
     int i;
 
-    if (stack->top < stack->size - 1)
+    if (stack->top > stack->size - 1)
         return ;
     tmp1 = stack->body[stack->size - 1];
     stack->body[stack->size - 1] = stack->body[stack->top];
@@ -39,7 +39,7 @@ void rrotate(t_stack *stack, char *str)
     int tmp2;
     int i;
 
-    if(stack->top < stack->size - 1)
+    if (stack->top > stack->size - 1)
         return ;
     tmp1 = stack->body[stack->top];
     stack->body[stack->top] = stack->body[stack->size - 1];
