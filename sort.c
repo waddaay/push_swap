@@ -6,7 +6,7 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 22:54:17 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/09 03:04:03 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/09 03:48:17 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,40 @@ int max(t_stack *stack)
     int i;
 
     i = stack->top;
-    // printf("top : %d, size : %d", stack->top, stack->size);
-    max = stack->body[stack->top];
+    max = stack->top;
     while (i < stack->size)
     {
-        if (stack->body[i] > max)
-            max = stack->body[i];
+        if (stack->body[i] > stack->body[max])
+            max = i;
         i++;
     }
     return (max);
+}
+
+void push_all_to_a(t_stack *stack_a, t_stack *stack_b)
+{
+    int max_indice;
+    int max_value;
+    int meduim;
+    int pushed;
+    
+    pushed = 0;
+    while (stack_a->top > 0)
+    {
+        max_indice = max(stack_b);
+        meduim = (stack_a->size - pushed) / 2;
+        max_value = stack_b->body[max_indice];
+        if (max_indice > meduim)
+        {
+            while (max_value != stack_b->body[stack_b->top])
+                rotate(stack_b, "rrb\n");
+        }
+        else
+        {
+            while (max_value != stack_b->body[stack_b->top])
+                rrotate(stack_b, "rb\n");
+        }
+        pa(stack_a, stack_b);
+        pushed++;
+    }
 }
