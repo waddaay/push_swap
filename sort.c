@@ -6,7 +6,7 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 22:54:17 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/09 03:48:17 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/09 04:35:04 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_stack    *sorted_stack(t_stack *stack_a)
     }
     return stack_s;
 }
+// it's better to remove stack s
 
 void push_all_to_b(t_stack *stack_a, t_stack *stack_b, t_stack *stack_s, int div)
 {
@@ -54,12 +55,13 @@ void push_all_to_b(t_stack *stack_a, t_stack *stack_b, t_stack *stack_s, int div
     while (pv1 < stack_a->size - 1)
     {
         pv1 = (stack_s->size + stack_s->top) / div;
+        // pv1 += pv1;
         if (pv1 >= stack_a->size)
             pv1 = stack_a->size - 1;
         stack_s->top = stack_s->top + pv1;
         pv2 = pv1 / 2;
         i = 0;
-        while (i++ < stack_s->size)
+        while (i++ < stack_s->top && stack_a->top != stack_a->size - 1)
         {
             
             if (stack_a->body[stack_a->top] < stack_s->body[pv1])
@@ -105,10 +107,10 @@ void push_all_to_a(t_stack *stack_a, t_stack *stack_b)
     pushed = 0;
     while (stack_a->top > 0)
     {
-        max_indice = max(stack_b);
         meduim = (stack_a->size - pushed) / 2;
+        max_indice = max(stack_b);
         max_value = stack_b->body[max_indice];
-        if (max_indice > meduim)
+        if (max_indice >= meduim)
         {
             while (max_value != stack_b->body[stack_b->top])
                 rotate(stack_b, "rrb\n");
@@ -118,6 +120,7 @@ void push_all_to_a(t_stack *stack_a, t_stack *stack_b)
             while (max_value != stack_b->body[stack_b->top])
                 rrotate(stack_b, "rb\n");
         }
+        sleep(1);
         pa(stack_a, stack_b);
         pushed++;
     }
