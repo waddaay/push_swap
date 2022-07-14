@@ -6,11 +6,13 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 22:54:17 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/13 16:23:35 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/14 05:03:46 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// it's better to remove stack s
 
 t_stack    *sorted_stack(t_stack *stack_a)
 {
@@ -43,39 +45,7 @@ t_stack    *sorted_stack(t_stack *stack_a)
     }
     return stack_s;
 }
-// it's better to remove stack s
 
-void push_all_to_b(t_stack *stack_a, t_stack *stack_b, t_stack *stack_s, int div)
-{
-    int pv1;
-    int pv2;
-    int i;
-    
-    pv1 = stack_s->size / div;
-    while (pv1 < stack_a->size - 1)
-    {
-        stack_s->top = stack_s->top + pv1;
-        pv2 = pv1 / 2;
-        i = 0;
-        while (i++ < stack_s->size - stack_s->top)
-        {
-            if (stack_a->body[stack_a->top] < stack_s->body[pv1])
-            {
-                pb(stack_a, stack_b);
-                if (stack_b->top + 2 < stack_b->size)
-                {
-                    if (stack_b->body[stack_b->top] > stack_s->body[pv2])
-                        rotate(stack_b, "rb\n");
-                }
-            }        
-            else
-                rotate(stack_a, "ra\n");
-        }
-        pv1 = (stack_s->size + stack_s->top ) / div;
-    }
-    free(stack_s->body);
-    free(stack_b);
-}
 
 int max(t_stack *stack)
 {
@@ -93,40 +63,61 @@ int max(t_stack *stack)
     return (max);
 }
 
+void push_all_to_b (t_stack *stack_a, t_stack *stack_b, int div)
+{
+    t_stack *stack_s;
+    int     pv1;
+    int     pv2 = 0;
+    int     i;
+    int     pushed;
+    stack_s = sorted_stack(stack_a);
+    int vp1 = stack_s->body[0];
+    pv1 = stack_a->size / div;
+    pushed = 0;
+    while (stack_b->top > 1)
+    {
+        pv2 = (pv1 / 2) + pv2;
+        i = 0;
+        while (pushed <= pv1)
+        {
+            if (stack_b->body[stack_b->top] <= stack_s->body[pv2] && stack_a->body[stack_a->top] > stack_s->body[pv1] && stack_b->top <= stack_b->size - 2 && stack_b->body[stack_b->top] >= vp1)
+                rr(stack_a, stack_b);
+            else if (stack_b->body[stack_b->top] <= stack_s->body[pv2] && stack_b->top <= stack_b->size - 2 && stack_b->body[stack_b->top] >= vp1)
+                    rotate(stack_b, "rb\n");
+            if (stack_a->body[stack_a->top] <= stack_s->body[pv1])
+            {
+                pb(stack_a, stack_b);
+                pushed++;
+            }
+            else
+                rotate(stack_a, "ra\n");
+        }
+        vp1 = stack_s->body[pv1];
+        pv1 = ((stack_a->size - pushed) / div) + pushed;
+    }  
+}
+
 void push_all_to_a(t_stack *stack_a, t_stack *stack_b)
 {
     int max_indice;
     int max_value;
-    int meduim;
-    int pushed;
+    int meduim = 0;
     
-    pushed = 0;
     while (stack_a->top > 0)
     {
-        meduim = (stack_b->size - stack_b->top) / 2;
+        meduim = ((stack_b->size - stack_b->top) / 2) + stack_b->top;
         max_indice = max(stack_b);
         max_value = stack_b->body[max_indice];
-        if (max_indice == stack_b->top)
-            pa(stack_a, stack_b);
-        else if (max_indice - stack_b->top < stack_b->size - max_indice)
+        if (max_indice <= meduim)
         {
-            while (max_indice >= stack_b->top)
-            {
+            while (stack_b->body[stack_b->top] != max_value)
                 rotate(stack_b, "rb\n");
-                printf("%d %d\n", max_indice, stack_b->size);
-                max_indice--;
-            }
         }
         else
         {
-            while (max_indice < stack_b->size)
-            {
+            while (stack_b->body[stack_b->top] != max_value)
                 rrotate(stack_b, "rrb\n");
-                max_indice++;
-                printf("%d %d\n", max_indice, stack_b->size);
-            }
         }
         pa(stack_a, stack_b);
-        pushed++;
     }
 }
