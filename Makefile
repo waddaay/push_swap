@@ -6,7 +6,7 @@
 #    By: ywadday <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/04 21:39:43 by ywadday           #+#    #+#              #
-#    Updated: 2022/07/15 22:56:05 by ywadday          ###   ########.fr        #
+#    Updated: 2022/07/16 02:42:59 by ywadday          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,14 @@ SRC = sort.c\
 	swap.c\
 	rotate.c\
 	check_div.c\
-	instructions.c\
+	rules.c\
 	fill_stack.c\
 	ft_atoi.c\
 	ft_strlcpy.c\
 	ft_split.c\
 	ft_putstr_fd.c\
 	check_errors.c\
+	is_numeric.c\
 
 
 SRC_BONUS =	checker.c\

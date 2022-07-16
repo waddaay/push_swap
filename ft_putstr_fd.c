@@ -6,11 +6,12 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 17:47:22 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/15 23:53:36 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/16 02:39:17 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;

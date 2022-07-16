@@ -6,11 +6,12 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 18:41:14 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/15 22:41:09 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/16 02:40:47 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 char	*ft_substr(char *s, int start, int len)
 {
 	int		str_len;
@@ -84,7 +85,7 @@ char	*ft_strdup(char *s1)
 {
 	char	*new;
 	int		i;
- 
+
 	i = 0;
 	new = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
 	if (!new)
