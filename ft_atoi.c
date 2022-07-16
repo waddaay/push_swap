@@ -6,16 +6,16 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 14:23:25 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/15 03:05:05 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/15 15:26:56 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	i;
-	int	s;
-	int	sign;
+	int		i;
+	long	s;
+	long	sign;
 
 	i = 0;
 	s = 0;

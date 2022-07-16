@@ -6,7 +6,7 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:57:36 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/14 21:29:29 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/16 01:00:47 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,17 @@ void rrotate(t_stack *stack, char *str, int b)
         ft_putstr_fd(str, 1);
 }
 
-void rr(t_stack *stack_a, t_stack *stack_b, int b)
+void rr(t_stack *stack_a, t_stack *stack_b,char *str, int b)
 {
-    rotate(stack_a, NULL, 1);
-    rotate(stack_b, NULL, 1);
+    rotate(stack_a, NULL, 0);
+    rotate(stack_b, NULL, 0);
     if (b == 1)
-        ft_putstr_fd("rr\n", 1);
+        ft_putstr_fd(str, 1);
 }
 
 void rrr(t_stack *stack_a, t_stack *stack_b)
 {
-    rrotate(stack_a, "rra\n", 1);
-    rrotate(stack_b, "rrb\n", 1);
+    rrotate(stack_a, "rra\n", 0);
+    rrotate(stack_b, "rrb\n", 0);
 }
 

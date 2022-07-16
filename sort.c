@@ -6,56 +6,37 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 22:54:17 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/15 11:38:47 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/15 22:56:11 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// it's better to remove stack s and replace it by a simple table (to do later)
-
-t_stack    *sorted_stack(t_stack *stack_a)
-{
-    t_stack *stack_s;
-    int     i;
-    int     j;
-    
-    stack_s = create_stack(stack_a->size, 0);
-    i = -1;
-    while (i++ < stack_a->size)
-    {
-        stack_s->body[i] = stack_a->body[i];
-    }
-    i = 0;
-    while (i < stack_s->size)
-    {
-        j = i + 1;
-        while (j < stack_s->size)
-        {
-            if (stack_s->body[i] > stack_s->body[j])
-                ft_swap(&stack_s->body[i], &stack_s->body[j]);
-            j++;
-        }
-        i++;
-    }
-    return stack_s;
-}
-
-void *sort_tab(int *tab, int size)
+int *sort_tab(long *tab, int size)
 {
     int i;
     int j;
-    
+    int *ptr;
+
+    ptr = (int *)malloc(sizeof(int) * size);
+    if (!tab)
+        return (0);
     i = -1;
     while (++i < size)
     {
-        j = i + i -1;
-        while (++j < size)
+        ptr[i] = tab[i];
+    }
+    i = -1;
+    while (++i < size)
+    {
+        j = -1;
+        while (++j < size - 1)
         {
-            if (tab[i] > tab[j])
-                ft_swap(&tab[i], &tab[j]);
+            if (ptr[i] < ptr[j])
+                ft_swap(&ptr[i], &ptr[j]);
         }
     }
+    return (ptr);
 }
 
 int pick_div(int size, int div)
@@ -73,11 +54,12 @@ int pick_div(int size, int div)
 
 void push_all_to_b (t_stack *stack_a, t_stack *stack_b, int div, int b)
 {
-    t_stack *stack_s;
+    int *s_tab;
     t_attr  attr;
     
-    stack_s = sorted_stack(stack_a);
-    attr.vp1 = stack_s->body[0];
+    attr.i = -1;
+    s_tab = sort_tab(stack_a->body, stack_a->size);
+    attr.vp1 = s_tab[0];
     attr.pv1 = (stack_a->size / div);
     attr.pv2 = attr.pv1 / 2;
     stack_a->pushed = 0;
@@ -85,13 +67,14 @@ void push_all_to_b (t_stack *stack_a, t_stack *stack_b, int div, int b)
     {
         attr.b = b;
         attr.div = div;
-        instructions(stack_a, stack_b, stack_s, attr);
-        attr.vp1 = stack_s->body[attr.pv1];
+        instructions(stack_a, stack_b, s_tab, attr);
+        attr.vp1 = s_tab[attr.pv1];
         attr.pv2 = attr.pv1;
         div = pick_div(stack_a->size - stack_a->pushed, div);
         attr.pv1 = ((stack_a->size - stack_a->pushed) / div) + stack_a->pushed + 1;
         attr.pv2 = ((attr.pv1 - attr.pv2) / 2) + attr.pv2;
-    }  
+    } 
+    free(s_tab);
 }
 
 void push_all_to_a(t_stack *stack_a, t_stack *stack_b, int b)
@@ -110,7 +93,7 @@ void push_a(t_stack *stack_a, t_stack *stack_b, t_attr attr)
     attr.med = ((stack_b->size - stack_b->top) / 2) + stack_b->top;
     attr.max = max(stack_b);
     attr.max_val = stack_b->body[attr.max];
-    if (attr.max <= attr.med)
+    if (attr.max <= attr.med) 
     {
         while (stack_b->body[stack_b->top] != attr.max_val)
         {
