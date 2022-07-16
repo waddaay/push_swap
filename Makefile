@@ -6,7 +6,7 @@
 #    By: ywadday <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/04 21:39:43 by ywadday           #+#    #+#              #
-#    Updated: 2022/07/16 02:42:59 by ywadday          ###   ########.fr        #
+#    Updated: 2022/07/16 05:02:13 by ywadday          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = sort.c\
 	swap.c\
 	rotate.c\
 	check_div.c\
-	rules.c\
+	rules.c\ 
 	fill_stack.c\
 	ft_atoi.c\
 	ft_strlcpy.c\
