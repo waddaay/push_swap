@@ -6,7 +6,7 @@
 /*   By: ywadday <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 20:14:17 by ywadday           #+#    #+#             */
-/*   Updated: 2022/07/15 03:05:22 by ywadday          ###   ########.fr       */
+/*   Updated: 2022/07/16 01:26:23 by ywadday          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ int	word_count(char *s, char c)
 {
 	int	i;
 	int	count;
-
+ 
 	i = 0;
 	count = 0;
 	while (s[i])
